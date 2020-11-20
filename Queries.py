@@ -73,9 +73,3 @@ def getDisponibles(id):
     listaDisponibles.append(x)
 
   return listaDisponibles
-
-
-l = getDisponibles(1)
-
-for x in l:
-  print(x)
