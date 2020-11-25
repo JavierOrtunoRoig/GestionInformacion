@@ -1,20 +1,9 @@
 from tkinter import *
 from tkinter.font import BOLD
 import Queries as Q
+import Controlador as C
 
-
-def insertElementInAListbox(listbox, posicion, listaElementos):
-
-    for element in listaElementos:
-
-        id, firstname, lastname = element
-        listbox.insert(posicion, "ID: " + str(id) + "       firstname: " + firstname + "        lastname: " + lastname)
-
-def main():
-    root = Tk()
-    root.title("Trabajo")
-    root.geometry("1920x1080")
-
+def crearYColocarcomponentes():
     espacio1Label = Label(text="                                                                                                  ")
     espacio2Label = Label(text="                                                                                                  ")
 
@@ -25,6 +14,19 @@ def main():
     disponiblesLabel = Label(text="Disponibles")
     disponiblesLabel.config(font=("Times New Roman", 24, BOLD))
 
+    personaLabel.grid(row=0, column=0)
+    amigosLabel.grid(row=0, column=2)
+    disponiblesLabel.grid(row=0, column=4)
+    espacio1Label.grid(row = 1, column=1)
+    espacio2Label.grid(row = 1, column=3)
+
+def main():
+    root = Tk()
+    root.title("Trabajo")
+    root.geometry("1920x1080")
+
+    crearYColocarcomponentes()
+
 
     personTam = 0
     amigosTam = 0
@@ -33,20 +35,14 @@ def main():
     person_listbox = Listbox(root, width=60, height=10)
     amigos_listbox = Listbox(root, width=60, height=10)
     disponibles_listbox = Listbox(root, width=60, height=10)
-
-
-    personaLabel.grid(row=0, column=0)
-    amigosLabel.grid(row=0, column=2)
-    disponiblesLabel.grid(row=0, column=4)
+    
 
     person_listbox.grid(row = 1, column=0)
-    espacio1Label.grid(row = 1, column=1)
     amigos_listbox.grid(row = 1, column=2)
-    espacio2Label.grid(row = 1, column=3)
     disponibles_listbox.grid(row = 1, column=4)
 
     listaPersonas = Q.getPersonas()
-    insertElementInAListbox(person_listbox, personTam, listaPersonas)    
+    C.insertElementInAListbox(person_listbox, personTam, listaPersonas)    
 
     root.mainloop()
 
