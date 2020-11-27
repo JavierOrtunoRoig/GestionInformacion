@@ -20,6 +20,11 @@ def crearYColocarcomponentes():
     espacio1Label.grid(row = 1, column=1)
     espacio2Label.grid(row = 1, column=3)
 
+
+
+
+
+
 def main():
     root = Tk()
     root.title("Trabajo")
@@ -27,24 +32,35 @@ def main():
 
     crearYColocarcomponentes()
 
-
     personTam = 0
     amigosTam = 0
     disponiblesTam = 0
 
-    person_listbox = Listbox(root, width=60, height=10)
-    amigos_listbox = Listbox(root, width=60, height=10)
-    disponibles_listbox = Listbox(root, width=60, height=10)
+    person_listbox = Listbox(root, width=60, height=10, exportselection = 0)
+    amigos_listbox = Listbox(root, width=60, height=10, exportselection = 0)
+    disponibles_listbox = Listbox(root, width=60, height=10, exportselection = 0)
     
 
-    person_listbox.grid(row = 1, column=0)
-    amigos_listbox.grid(row = 1, column=2)
-    disponibles_listbox.grid(row = 1, column=4)
+    person_listbox.grid(row = 1, column=0, rowspan = 2)
+    amigos_listbox.grid(row = 1, column=2, rowspan = 2)
+    disponibles_listbox.grid(row = 1, column=4, rowspan = 2)
 
     listaPersonas = Q.getPersonas()
     C.insertElementInAListbox(person_listbox, personTam, listaPersonas)    
 
+    imagenFlechaRosa = PhotoImage(file = "flechaDerechaRosa2.png")
+    imagenFlechaAzul = PhotoImage(file = "flechaIzquierdaAzul2.png")
+    
+
+    buttonIzq = Button(image = imagenFlechaRosa)
+    buttonIzq.grid(row = 2, column = 3)
+    buttonDer = Button(image = imagenFlechaAzul, command = lambda : C.pasarDisponibleAmigo(person_listbox, amigos_listbox, disponibles_listbox,disponiblesTam))
+    buttonDer.grid(row = 1, column = 3)
+    buttonIntr = Button(text = "Seleccionar", command = lambda : C.mostrarSeleccionado(person_listbox, amigos_listbox, disponibles_listbox, amigosTam, disponiblesTam))
+    buttonIntr.grid(row = 3, column = 0)
+
     root.mainloop()
+
 
 if __name__ == "__main__":
     
