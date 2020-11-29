@@ -29,6 +29,8 @@ def main():
     root = Tk()
     root.title("Trabajo")
     root.geometry("1920x1080")
+    fondoImagen = PhotoImage(file = "rastreo covid2.png")
+    fondo = Label(root, image = fondoImagen).place(x = 0, y = 0)
 
     crearYColocarcomponentes()
 
@@ -52,10 +54,10 @@ def main():
     imagenFlechaAzul = PhotoImage(file = "flechaIzquierdaAzul2.png")
     
 
-    buttonIzq = Button(image = imagenFlechaRosa)
-    buttonIzq.grid(row = 2, column = 3)
-    buttonDer = Button(image = imagenFlechaAzul, command = lambda : C.pasarDisponibleAmigo(person_listbox, amigos_listbox, disponibles_listbox,disponiblesTam))
-    buttonDer.grid(row = 1, column = 3)
+    buttonDer = Button(image = imagenFlechaRosa, command = lambda : C.pasarAmigoDisponible(person_listbox, amigos_listbox, disponibles_listbox, amigosTam))
+    buttonDer.grid(row = 2, column = 3)
+    buttonIzq = Button(image = imagenFlechaAzul, command = lambda : C.pasarDisponibleAmigo(person_listbox, amigos_listbox, disponibles_listbox, disponiblesTam))
+    buttonIzq.grid(row = 1, column = 3)
     buttonIntr = Button(text = "Seleccionar", command = lambda : C.mostrarSeleccionado(person_listbox, amigos_listbox, disponibles_listbox, amigosTam, disponiblesTam))
     buttonIntr.grid(row = 3, column = 0)
 

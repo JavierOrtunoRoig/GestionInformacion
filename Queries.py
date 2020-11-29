@@ -54,51 +54,52 @@ def getAmigos(id):
 
 
 def getDisponibles(id):
-  listaDisponibles = []
+    listaDisponibles = []
 
-  cursor = mydb.cursor()
+    cursor = mydb.cursor()
 
-  cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
+    cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
 
-  result = cursor.fetchall()
+    result = cursor.fetchall()
 
-  selectStrFromPeople = "SELECT * FROM people where ID NOT IN (" + str(id) + ","
+    selectStrFromPeople = "SELECT * FROM people where ID NOT IN (" + str(id) + ","
 
-  for x in result:
-    selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
+    for x in result:
+        selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
 
-  selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
+    selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
 
-  cursor.execute(selectStrFromPeople)
+    cursor.execute(selectStrFromPeople)
 
-  result = cursor.fetchall()
+    result = cursor.fetchall()
 
-  for x in result:
-    listaDisponibles.append(x)
+    for x in result:
+        listaDisponibles.append(x)
 
-  return listaDisponibles
+    if len(listaDisponibles) != 0 :
+        return listaDisponibles
 
 
 def agregarAmigo(id1, id2):
 
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT id FROM people WHERE id = " + id1)
+    if id1 != id2:
+       cursor.execute("INSERT INTO `rastreocovid19`.`friends` (`ID1`, `ID2`) VALUES ('" + id1 + "', '" + id2 + "');")
+       mydb.commit() 
 
-    value1 = cursor.next
-
-    cursor.execute("SELECT id FROM people WHERE id = " + id2)
-
-    value2 = cursor.fetchall()
-
-    if value1 != value2:
-        cursor.execute("INSERT INTO friends VALUES(ID1 = " + str(value1) + ", ID2 = " + str(value2) + ");")
+       cursor.execute("INSERT INTO `rastreocovid19`.`friends` (`ID1`, `ID2`) VALUES ('" + id2 + "', '" + id1 + "');")
+       mydb.commit() 
 
 
 def eliminarAmigo(id1, id2):
     cursor = mydb.cursor()
 
-    cursor.execute("DELETE * FROM friends WHERE ID1 = " + str(id1) + " AND ID2 = " + str(id2))
+    if id1 != id2:
+        cursor.execute("DELETE FROM `rastreocovid19`.`friends` WHERE (`ID1` = '" + id1 + "') and (`ID2` = '" + id2 + "');")
+        mydb.commit()
 
+        cursor.execute("DELETE FROM `rastreocovid19`.`friends` WHERE (`ID1` = '" + id2 + "') and (`ID2` = '" + id1 + "');")
+        mydb.commit()
 
 
