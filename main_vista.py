@@ -4,8 +4,8 @@ import Queries as Q
 import Controlador as C
 
 def crearYColocarcomponentes():
-    espacio1Label = Label(text="                                                                                                  ")
-    espacio2Label = Label(text="                                                                                                  ")
+    espacio1Label = Label(text="                                                                ")
+    espacio2Label = Label(text="                                                                ")
 
     personaLabel = Label(text="Personas")
     personaLabel.config(font=("Times New Roman", 24, BOLD))
@@ -21,16 +21,15 @@ def crearYColocarcomponentes():
     espacio2Label.grid(row = 1, column=3)
 
 
-
-
-
-
 def main():
     root = Tk()
     root.title("Trabajo")
-    width = root.winfo_screenwidth()
+
+    width  = root.winfo_screenwidth()
     height = root.winfo_screenheight()
     root.geometry(f'{width}x{height}')
+
+
     fondoImagen = PhotoImage(file = "rastreo covid2.png")
     fondo = Label(root, image = fondoImagen).place(x = 0, y = 0)
 
