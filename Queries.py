@@ -29,7 +29,6 @@ def getPersonas():
 
         return listaPersonas
 
-
 def getAmigos(id):
     try:
         listaAmigos = []
@@ -58,7 +57,6 @@ def getAmigos(id):
         listaAmigos = []
 
     return listaAmigos
-
 
 def getDisponibles(id):
     try:
@@ -90,7 +88,6 @@ def getDisponibles(id):
 
     return listaDisponibles
 
-
 def agregarAmigo(id1, id2):
 
     cursor = mydb.cursor()
@@ -101,7 +98,6 @@ def agregarAmigo(id1, id2):
 
        cursor.execute("INSERT INTO `rastreocovid19`.`friends` (`ID1`, `ID2`) VALUES ('" + id2 + "', '" + id1 + "');")
        mydb.commit() 
-
 
 def eliminarAmigo(id1, id2):
     cursor = mydb.cursor()

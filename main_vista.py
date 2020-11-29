@@ -25,12 +25,15 @@ def main():
     root = Tk()
     root.title("Trabajo")
 
+
     width  = root.winfo_screenwidth()
     height = root.winfo_screenheight()
     root.geometry(f'{width}x{height}')
 
+    root.pack_propagate(0)
 
-    fondoImagen = PhotoImage(file = "rastreo covid2.png")
+
+    fondoImagen = PhotoImage(file = "./assets/rastreo covid2.png")
     fondo = Label(root, image = fondoImagen).place(x = 0, y = 0)
 
     crearYColocarcomponentes()
@@ -51,8 +54,8 @@ def main():
     listaPersonas = Q.getPersonas()
     C.insertElementInAListbox(person_listbox, personTam, listaPersonas)    
 
-    imagenFlechaRosa = PhotoImage(file = "flechaDerechaRosa2.png")
-    imagenFlechaAzul = PhotoImage(file = "flechaIzquierdaAzul2.png")
+    imagenFlechaRosa = PhotoImage(file = "./assets/flechaDerechaRosa2.png")
+    imagenFlechaAzul = PhotoImage(file = "./assets/flechaIzquierdaAzul2.png")
     
 
     buttonDer = Button(image = imagenFlechaRosa, command = lambda : C.pasarAmigoDisponible(person_listbox, amigos_listbox, disponibles_listbox, amigosTam))

@@ -34,8 +34,6 @@ def mostrarSeleccionado(listbox1, listbox2, listbox3, posicion2, posicion3):
                 id, firstname, lastname = element
                 listbox3.insert(posicion3, "ID: " + str(id) + "       firstname: " + firstname + "        lastname: " + lastname)
 
-
-
 def pasarDisponibleAmigo(listbox1, listbox2, listbox3, posicion):
     tupla1 = listbox1.curselection()
     tupla3 = listbox3.curselection()
@@ -75,7 +73,6 @@ def pasarAmigoDisponible(listbox1, listbox2, listbox3, posicion):
 
         mostrarAmigos(listbox2, posicion, Q.getAmigos(value1))
         mostrarDisponibles(listbox3, posicion, Q.getDisponibles(value1))
-
 
 def mostrarAmigos(listbox, posicion, listaElementos):
     if listaElementos is not None :    
