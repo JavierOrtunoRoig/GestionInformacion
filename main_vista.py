@@ -28,7 +28,9 @@ def crearYColocarcomponentes():
 def main():
     root = Tk()
     root.title("Trabajo")
-    root.geometry("1920x1080")
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    root.geometry(f'{width}x{height}')
     fondoImagen = PhotoImage(file = "rastreo covid2.png")
     fondo = Label(root, image = fondoImagen).place(x = 0, y = 0)
 

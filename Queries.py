@@ -3,46 +3,50 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Patata",  ## Cambiar contraseña según BD personal
+    password="Patata_325",  ## Cambiar contraseña según BD personal
     database="rastreocovid19"
 )
 
 
 def getPersonas():
-    listaPersonas = []
+    try:
 
-    cursor = mydb.cursor()
+        listaPersonas = []
 
-    cursor.execute("SELECT * FROM people")
+        cursor = mydb.cursor()
 
-    result = cursor.fetchall()
+        cursor.execute("SELECT * FROM people")
 
-    for x in result:
-        listaPersonas.append(x)
+        result = cursor.fetchall()
 
-    return listaPersonas
+        for x in result:
+            listaPersonas.append(x)
+
+    except:
+        listaPersonas = []
+
+    finally:
+
+        return listaPersonas
 
 
 def getAmigos(id):
-    listaAmigos = []
+    try:
+        listaAmigos = []
 
-    tieneAmigos = False
+        cursor = mydb.cursor()
 
-    cursor = mydb.cursor()
+        cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
 
-    cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
+        result = cursor.fetchall()
 
-    result = cursor.fetchall()
+        selectStrFromPeople = "SELECT * FROM people where ID IN ( "
 
-    selectStrFromPeople = "SELECT * FROM people where ID IN ( "
+        for x in result:
+            selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
 
-    for x in result:
-        selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
-        tieneAmigos = True
+        selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
 
-    selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
-
-    if tieneAmigos:
         cursor.execute(selectStrFromPeople)
 
         result = cursor.fetchall()
@@ -50,34 +54,41 @@ def getAmigos(id):
         for x in result:
             listaAmigos.append(x)
 
+    except:
+        listaAmigos = []
+
     return listaAmigos
 
 
 def getDisponibles(id):
-    listaDisponibles = []
+    try:
 
-    cursor = mydb.cursor()
+        listaDisponibles = []
 
-    cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
+        cursor = mydb.cursor()
 
-    result = cursor.fetchall()
+        cursor.execute("SELECT ID2 FROM friends where ID1 = " + str(id))
 
-    selectStrFromPeople = "SELECT * FROM people where ID NOT IN (" + str(id) + ","
+        result = cursor.fetchall()
 
-    for x in result:
-        selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
+        selectStrFromPeople = "SELECT * FROM people where ID NOT IN (" + str(id) + ","
 
-    selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
+        for x in result:
+            selectStrFromPeople = selectStrFromPeople + str(x[0]) + ","
 
-    cursor.execute(selectStrFromPeople)
+        selectStrFromPeople = selectStrFromPeople[0:len(selectStrFromPeople) - 1] + ")"
 
-    result = cursor.fetchall()
+        cursor.execute(selectStrFromPeople)
 
-    for x in result:
-        listaDisponibles.append(x)
+        result = cursor.fetchall()
 
-    if len(listaDisponibles) != 0 :
-        return listaDisponibles
+        for x in result:
+            listaDisponibles.append(x)
+
+    except:
+        listaDisponibles = []
+
+    return listaDisponibles
 
 
 def agregarAmigo(id1, id2):
